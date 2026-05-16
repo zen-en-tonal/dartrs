@@ -89,7 +89,7 @@ struct Args {
 macro_rules! run {
     ($model:ident, $generation_config:ident) => {
         match $model.run(&mut $generation_config) {
-            Ok(output) => {}
+            Ok(_) => {}
             Err(e) => {
                 eprintln!("Error: {:?}", e);
             }

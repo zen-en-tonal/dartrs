@@ -2,7 +2,6 @@ use anyhow::{Error as E, Result};
 
 use candle_core::{DType, Device, Tensor};
 use candle_transformers::generation::Sampling;
-use rand::Rng;
 use tokenizers::Tokenizer;
 
 use crate::logits_processor::DartLogitsProcessor;
@@ -82,10 +81,7 @@ impl GenerationConfig {
         };
         let seed = match seed {
             Some(seed) => seed,
-            None => {
-                let mut rng = rand::thread_rng();
-                rng.gen()
-            }
+            None => rand::random(),
         };
         let logits_processor = DartLogitsProcessor::from_sampling(seed, sampling, ban_token_ids);
 
